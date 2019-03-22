@@ -1,0 +1,31 @@
+{
+  "name": "wasm-prototyping",
+  "version": "1.0.0",
+  "description": "WebAssembly prototyping",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "http-server": "http-server",
+    "serve-build": "npm run http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jojanper/wasm-prototyping.git"
+  },
+  "keywords": [
+    "WebAssembly",
+    "WASM",
+    "emscripten",
+    "C",
+    "C++"
+  ],
+  "author": "Juha Ojanperä (juha.ojanpera@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jojanper/wasm-prototyping/issues"
+  },
+  "homepage": "https://github.com/jojanper/wasm-prototyping#readme",
+  "devDependencies": {
+    "http-server": "latest"
+  }
+}
