@@ -11,9 +11,16 @@ npm install
 ```
 
 ### Build Wasm target
-```
-npm run build
-```
+
+- Directly usimg `emcc`
+  ```
+  npm run build
+  ```
+
+- With `CMake` (you need to adjust `set-emscripten-path` script in `package.json`)
+  ```
+  npm run cbuild
+  ```
 
 ### Start HTTP server
 ```
