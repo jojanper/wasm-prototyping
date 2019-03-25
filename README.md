@@ -17,7 +17,7 @@ npm install
   npm run build
   ```
 
-- With `CMake` (you need to adjust `set-emscripten-path` script in `package.json`)
+- With `CMake` (you mey need to adjust `cmake-build` script in `package.json`, currently it is assumed that emscripten is installed under `bin` folder within user's home directory)
   ```
   npm run cbuild
   ```
@@ -26,7 +26,7 @@ npm install
 ```
 npm run serve-build
 ```
-Open http://localhost:8081/index.html in your browser.
+Open http://localhost:3003/index.html in your browser.
 
 ### Tips
 To translate between wasm and wat [(WebAssembly Text)](https://github.com/WebAssembly/wabt) format

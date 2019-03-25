@@ -5,13 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "emcc src/hello.c -I src -Os -s WASM=1 -o library.wasm",
-    "cbuild": "rm -Rf build && npm run set-emscripten-path && npm run cmake-build && npm run make",
-    "cmake-build": "cmake -H. -B./build -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=${EMSDK}/cmake/Modules/Platform/Emscripten.cmake",
+    "cbuild": "rm -Rf build && npm run cmake-build && npm run make",
+    "cmake-build": "export EMSDK=~/bin/emsdk/emscripten/1.38.29 && cmake -H. -B./build -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=${EMSDK}/cmake/Modules/Platform/Emscripten.cmake",
     "make": "cd build && make",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "http-server": "http-server",
-    "serve-build": "npm run http-server",
-    "set-emscripten-path": "export EMSDK=/home/jojanper/bin/emsdk/emscripten/1.38.29"
+    "serve-build": "npm run http-server -- -p 3003"
   },
   "repository": {
     "type": "git",
@@ -19,10 +17,11 @@
   },
   "keywords": [
     "WebAssembly",
-    "WASM",
+    "Wasm",
     "emscripten",
     "C",
-    "C++"
+    "C++",
+    "CMake"
   ],
   "author": "Juha Ojanperä (juha.ojanpera@gmail.com)",
   "license": "MIT",
