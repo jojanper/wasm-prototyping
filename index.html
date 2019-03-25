@@ -5,19 +5,16 @@
     if (!('WebAssembly' in window)) {
       alert('you need a browser with wasm support enabled :(');
     }
+
     const memory = new WebAssembly.Memory({
         initial: 256,
         maximum: 256
     });
 
-    // Loads a WebAssembly dynamic library, returns a promise.
-    // imports is an optional imports object
-    function loadWebAssembly(filename/*, imports*/) {
+    // Load a WebAssembly library
+    function loadWebAssembly(filename) {
       const importObject = {
-        global: {
-          //'NaN': NaN,
-          //'Infinity': Infinity
-        },
+        global: {},
         env: {
           'abortStackOverflow': _ => { throw new Error('overflow'); },
           '__memory_base': 1024,
@@ -33,11 +30,6 @@
           __emval_take_value: () => {},
           __emval_incref: () => {},
           __emval_decref: () => {},
-          /*
-          __embind_register_function: () => {
-            console.log(arguments);
-          },
-          */
           ___syscall6: () => {},
           ___syscall140: () => {},
           abortOnCannotGrowMemory: _ => { throw new Error('abortOnCannotGrowMemory'); },
@@ -45,73 +37,27 @@
           _emscripten_memcpy_big: () => {},
           _emscripten_get_heap_size: () => {},
           DYNAMICTOP_PTR: 0,
-
-          /*
-          __embind_register_function: (name) => {
-            console.log(arguments);
-            //console.log(arguments[2]['doubler']);
-          },
-          */
-
-          /*
-          nullFunc_ii: () => {},
-          nullFunc_iii: () => {},
-          nullFunc_iiii: () => {},
-          nullFunc_v: () => {},
-          nullFunc_vi: () => {},
-          nullFunc_vii: () => {},
-          nullFunc_viii: () => {},
-          nullFunc_viiii: () => {},
-          nullFunc_viiiii: () => {},
-          nullFunc_viiiiii: () => {},
-          ___cxa_begin_catch: () => {},
-          ___lock: () => {},
-          ___unlock: () => {},
-          ___syscall54: () => {},
-          tempDoublePtr: 0,
-          __ZTIi: 0,
-          __ZTVN10__cxxabiv117__class_type_infoE: 0
-          */
         }
       }
 
       async function createWebAssembly(path, imports) {
-        const result = await window.fetch(path);
-        const bytes = await result.arrayBuffer();
-        return WebAssembly.instantiate(bytes, importObject);
-
         const fetchPromise = fetch(path);
-        //const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
         return WebAssembly.instantiateStreaming(fetchPromise, imports);
       }
 
       return createWebAssembly(filename, importObject);
-
-      /*
-      // Fetch the file and compile it
-      return fetch(filename)
-        .then(response => response.arrayBuffer())
-        .then(buffer => WebAssembly.compile(buffer))
-        .then(module => {
-          // Create the instance.
-          return new WebAssembly.Instance(module, importObject);
-        });
-        */
     }
+
     // Main part of this example, loads the module and uses it.
-    loadWebAssembly('hello_world.wasm')
+    loadWebAssembly('library.wasm')
       .then(response => {
         console.log(response);
 
         const { instance } = response;
         console.log(instance);
 
-        //console.log(cwrap);
-
-        var exports = instance.exports; // the exports of that instance
+        const { exports } = instance;
         console.log(exports);
-        //console.log(exports.globalCtors());
-        //console.log(Module);
 
         // JavaScript sends data to WebAssembly, WebAssembly accesses the data via pointer
         const jsInput = new Uint8Array(3);
@@ -145,7 +91,7 @@
 
         let input = 21;
 
-        // now we are ready, set up the button so the user can run the code
+        // Now we are ready, set up the button so the user can run the code
         var button = document.getElementById('run');
         button.value = 'Call a method in the WebAssembly module';
         button.addEventListener('click', function() {
@@ -158,6 +104,7 @@
     .catch(err => { throw err; });
   </script>
 </head>
+
 <body>
   <input type="button" id="run" value="(waiting for WebAssembly)"/>
 </body>
