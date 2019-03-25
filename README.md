@@ -17,7 +17,7 @@ npm install
   npm run build
   ```
 
-- With `CMake` (you mey need to adjust `cmake-build` script in `package.json`, currently it is assumed that emscripten is installed under `bin` folder within user's home directory)
+- With `CMake` (you may need to adjust `cmake-build` script in `package.json`, currently it is assumed that emscripten is installed under `bin` folder within user's home directory)
   ```
   npm run cbuild
   ```
