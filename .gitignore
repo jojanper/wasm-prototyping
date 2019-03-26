@@ -2,3 +2,7 @@
 build
 node_modules
 library.wasm
+threads.js
+threads.worker.js
+threads.wasm
+threads.js.mem

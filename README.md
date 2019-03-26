@@ -1,5 +1,5 @@
 # wasm-prototyping
-> WebAssembly prototyping
+> WebAssembly prototyping. Minimal working environment to study WebAssembly and JavaScript interaction.
 
 ## Quickstart
 
@@ -27,6 +27,15 @@ npm install
 npm run serve-build
 ```
 Open http://localhost:3003/index.html in your browser.
+
+
+## Other build targets
+ - Use threads
+   ```
+   npm run tbuild
+   ```
+   Open http://localhost:3003/threads.html in your browser.
+
 
 ### Tips
 To translate between wasm and wat [(WebAssembly Text)](https://github.com/WebAssembly/wabt) format
