@@ -28,6 +28,10 @@ npm run serve-build
 ```
 Open http://localhost:3003/index.html in your browser.
 
+### Execution under Node.js
+```
+node index
+```
 
 ## Other build targets
  - Use threads
